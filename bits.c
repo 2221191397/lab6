@@ -154,7 +154,8 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-      return 1 << 31;
+	int res = 0x1;
+        return res << 31;
 }
 
 /*
@@ -203,10 +204,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) { 
-	int lower_bo = x + ( ~0x30 + 1 );
-	int upper_bo = 0x39 + ( ~x + 1 );
-
-	return !(lower_bo >> 31) & !(upper_bo >> 31);
+	return 2;
 }
 
 /* 
@@ -217,10 +215,7 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-	int M = !!x;
-	M = ~M + 1;
-
-	return (M & y) | ( ~M & z );
+	return 2;
 }
 
 /* 
@@ -231,16 +226,7 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {  
-	int s_x = (x >> 31) & 1;
- 	int s_y = (y >> 31) & 1;
-	
-	int diff = y + ( ~x + 1 );
-	int s_diff = (diff >> 31) & 1;
-
-	int case_1 = s_x & !s_y;
-	int case_2 = !(s_x ^ s_y) & !s_diff;
-
-	return case1 | case2;
+	return 2;
 }
 
 /* 
@@ -252,8 +238,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-	int n_x = ~x +1 ;
-	return ((x | n_x) >> 31) + 1;
+	return 2;
 }
 
 /* howManyBits - return the minimum number of bits required to represent x in
@@ -269,19 +254,7 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  
-	int sign = x >> 31;
-	x = x ^ sign;
-
-	int bit_needs = 1;
-
-	bit_needs += !!(x >> 16) << 4;
-  	bit_needs += !!(x >> 8) << 3;
-  	bit_needs += !!(x >> 4) << 2;
- 	bit_needs += !!(x >> 2) << 1;
-  	bit_needs += !!(x >> 1);
-
-  	return bit_needs;
+  	return 0;
 }
 
 //float
@@ -297,28 +270,7 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  	unsigned sign = uf $ 0x80000000;
-  	unsigned exp = (uf >> 23) & 0xFF;
-  	unsigned frac = uf & 0x007FFFFF;
-
-  	if(exp == 0xFF){
-		  return uf;
-	}
-
-  	else if(exp == 0){
-		  frac <<= 1;
-	 	  return sign | frac;
-  	}
-
-  	else{
-	 	 exp += 1;
-
-	  	 if(exp == 0xFF){
-		 	 return sign | 0x7F800000;
-		 }
-
-	  	 return sign | (exp << 23) | frac;
-  	}
+	return 2;
 }
 
 /* 
@@ -334,27 +286,7 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  	unsigned sign = uf >> 31;
-  	int exp = ((uf >> 23) & 0xFF) - 127;
- 	unsigned frac = (uf & 0x007FFFFF) | 0x00800000;
-
-  	if(exp >= 31){
-	 	 return 0x80000000;
-	}
-
-  	if(exp < 0){
-	 	 return 0;
-	}
-
-  	if(exp > 23){
-	 	 frac <<= (exp -23);
-	}
-
-  	else{
-	 	 frac >>= (23 - exp);
-	}
-  
-  	return sign ? -frac : frac;
+  	return 2;
 }
 
 //13
@@ -372,17 +304,5 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
-
-    if(x > 127){ 
-	    return 0x7F800000;
-    }
-
-    if(x < -149){
-	    return 0;
-    if(x >= -126){
-	    unsigned exp = x + 127;
-	    return exp << 23;
-    }
-
-    return 1 << (149 + x);
+    return 2;
 }
