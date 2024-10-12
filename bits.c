@@ -1,8 +1,7 @@
 /* 
  * CS:APP Data Lab 
  * 
- * Mohammad.Osama Bibi 2231173006
- *
+ * ( Zainab Tarek Fawaz  2221191397 ) 
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -135,6 +134,7 @@ NOTES:
 
 
 #endif
+//1
 /* 
  * bitXor - x^y using only ~ and & 
  *   Example: bitXor(4, 5) = 1
@@ -143,7 +143,9 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-	return ~(~(x & ~y) & ~(~x & y));
+
+  return ~(~(x & ~y) & ~(~x & y));
+
 }
 
 //2
@@ -154,10 +156,12 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-	int res = 0x1;
-        return res << 31;
+  int res = 0x1;
+  return res<<31;
+
 }
 
+//3
 /*
  * isTmax - returns 1 if x is the maximum, two's complement number,
  *     and 0 otherwise 
@@ -166,10 +170,13 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-        int y = x+1;
-	return !(~(x ^ y)) & !!y;
+
+  int x2 = x+1;
+  return !(~(x ^ x2)) & !!x2;
+
 }
 
+//4
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
  *   where bits are numbered from 0 (least significant) to 31 (most significant)
@@ -178,14 +185,17 @@ int isTmax(int x) {
  *   Max ops: 12
  *   Rating: 2
  */
-int allOddBits(int x) { 
- 	int M = 0xAA;
-	M = (M << 8) | M;
-	M = (M << 16) | M;
+int allOddBits(int x) {
+ 
+  int mask = 0xAAAAAAAA;
+  mask = (mask << 8) | mask;
+  mask = (mask << 16 ) | mask;
 
- 	return !((x & M) ^ M);
+  return !((x & mask) ^ mask);
+
 }
 
+//5
 /* 
  * negate - return -x 
  *   Example: negate(1) = -1.
@@ -194,9 +204,12 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-	return ~x + 1;
+  
+  return ~x +1;
+
 }
 
+//6
 /* 
  * isAsciiDigit - return 1 if 0x30 <= x <= 0x39 (ASCII codes for characters '0' to '9')
  *   Example: isAsciiDigit(0x35) = 1.
@@ -206,10 +219,12 @@ int negate(int x) {
  *   Max ops: 15
  *   Rating: 3
  */
-int isAsciiDigit(int x) { 
-	return 2;
+int isAsciiDigit(int x) {
+  return 2;
+
 }
 
+//7
 /* 
  * conditional - same as x ? y : z 
  *   Example: conditional(2,4,5) = 4
@@ -218,9 +233,11 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-	return 2;
+  return 2;
+
 }
 
+//8
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
  *   Example: isLessOrEqual(4,5) = 1.
@@ -228,10 +245,13 @@ int conditional(int x, int y, int z) {
  *   Max ops: 24
  *   Rating: 3
  */
-int isLessOrEqual(int x, int y) {  
-	return 2;
+int isLessOrEqual(int x, int y) {
+  return 2;
+
 }
 
+
+//9
 /* 
  * logicalNeg - implement the ! operator, using all of 
  *              the legal operators except !
@@ -241,9 +261,11 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-	return 2;
+  return 2;
+
 }
 
+//10
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
  *  Examples: howManyBits(12) = 5
@@ -257,9 +279,11 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  	return 0;
+  return 0;
+
 }
 
+//11
 //float
 /* 
  * floatScale2 - Return bit-level equivalent of expression 2*f for
@@ -273,9 +297,10 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-	return 2;
+ return 2;
 }
 
+//12
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
  *   for floating point argument f.
@@ -289,7 +314,8 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  	return 2;
+  return 2;
+
 }
 
 //13
@@ -308,4 +334,5 @@ int floatFloat2Int(unsigned uf) {
  */
 unsigned floatPower2(int x) {
     return 2;
+
 }
