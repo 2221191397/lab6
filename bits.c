@@ -1,7 +1,8 @@
 /* 
  * CS:APP Data Lab 
  * 
- * ( Zainab Tarek Fawaz  2221191397 ) 
+ * Mohammad.Osama Bibi 2231173006
+ *
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -134,7 +135,6 @@ NOTES:
 
 
 #endif
-//1
 /* 
  * bitXor - x^y using only ~ and & 
  *   Example: bitXor(4, 5) = 1
@@ -143,9 +143,7 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-
-  return ~(~(x & ~y) & ~(~x & y));
-
+	return ~(~(x & ~y) & ~(~x & y));
 }
 
 //2
@@ -156,12 +154,9 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-
-  return 1<<31;
-
+      return 1 << 31;
 }
 
-//3
 /*
  * isTmax - returns 1 if x is the maximum, two's complement number,
  *     and 0 otherwise 
@@ -170,13 +165,10 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-
-  int x2 = x+1;
-  return !(~(x ^ x2)) & !!x2;
-
+        int y = x+1;
+	return !(~(x ^ y)) & !!y;
 }
 
-//4
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
  *   where bits are numbered from 0 (least significant) to 31 (most significant)
@@ -185,14 +177,11 @@ int isTmax(int x) {
  *   Max ops: 12
  *   Rating: 2
  */
-int allOddBits(int x) {
- 
-  int mask = 0xAAAAAAAA;
-  return !((x & mask) ^ mask);
-
+int allOddBits(int x) { 
+ 	int M = 0xAAAAAAAA;
+ 	return !((x & M) ^ M);
 }
 
-//5
 /* 
  * negate - return -x 
  *   Example: negate(1) = -1.
@@ -201,12 +190,9 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-  
-  return ~x +1;
-
+	return ~x + 1;
 }
 
-//6
 /* 
  * isAsciiDigit - return 1 if 0x30 <= x <= 0x39 (ASCII codes for characters '0' to '9')
  *   Example: isAsciiDigit(0x35) = 1.
@@ -216,16 +202,13 @@ int negate(int x) {
  *   Max ops: 15
  *   Rating: 3
  */
-int isAsciiDigit(int x) {
- 
-  int Lower = x + (~0x30 +1);
-  int Upper = 0x39 + (~x +1);
+int isAsciiDigit(int x) { 
+	int lower_bo = x + ( ~0x30 + 1 );
+	int upper_bo = 0x39 + ( ~x + 1 );
 
-  return !(Lower >> 31) & !(Upper >> 31);
-
+	return !(lower_bo >> 31) & !(upper_bo >> 31);
 }
 
-//7
 /* 
  * conditional - same as x ? y : z 
  *   Example: conditional(2,4,5) = 4
@@ -234,15 +217,12 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
+	int M = !!x;
+	M = ~M + 1;
 
-  int mask = !!x;
-  mask = ~mask + 1;
-
-  return (mask & y) | (~mask & z);
-
+	return (M & y) | ( ~M & z );
 }
 
-//8
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
  *   Example: isLessOrEqual(4,5) = 1.
@@ -250,21 +230,19 @@ int conditional(int x, int y, int z) {
  *   Max ops: 24
  *   Rating: 3
  */
-int isLessOrEqual(int x, int y) {
-  
-  int signX = (x >> 31) & 1, signY = (y >> 31) & 1;
-  int diff = y + (~x +1);
-  int signDiff = (diff >> 31) & 1;
+int isLessOrEqual(int x, int y) {  
+	int s_x = (x >> 31) & 1;
+ 	int s_y = (y >> 31) & 1;
+	
+	int diff = y + ( ~x + 1 );
+	int s_diff = (diff >> 31) & 1;
 
-  int cas1 = signX & !signY;
-  int cas2 = !(signX ^ signY) & !signDiff;
+	int case_1 = s_x & !s_y;
+	int case_2 = !(s_x ^ s_y) & !s_diff;
 
-  return cas1 | cas2;
-
+	return case1 | case2;
 }
 
-
-//9
 /* 
  * logicalNeg - implement the ! operator, using all of 
  *              the legal operators except !
@@ -274,12 +252,10 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  int negX = ~x +1 ;
-  return ((x | negX) >> 31) + 1;
-
+	int n_x = ~x +1 ;
+	return ((x | n_x) >> 31) + 1;
 }
 
-//10
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
  *  Examples: howManyBits(12) = 5
@@ -294,22 +270,20 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
   
-  int sign = x >> 31;
-  x = x ^ sign;
+	int sign = x >> 31;
+	x = x ^ sign;
 
-  int bits = 1;
+	int bit_needs = 1;
 
-  bits += !!(x >> 16) << 4;
-  bits += !!(x >> 8) << 3;
-  bits += !!(x >> 4) << 2;
-  bits += !!(x >> 2) << 1;
-  bits += !!(x >> 1);
+	bit_needs += !!(x >> 16) << 4;
+  	bit_needs += !!(x >> 8) << 3;
+  	bit_needs += !!(x >> 4) << 2;
+ 	bit_needs += !!(x >> 2) << 1;
+  	bit_needs += !!(x >> 1);
 
-  return bits;
-
+  	return bit_needs;
 }
 
-//11
 //float
 /* 
  * floatScale2 - Return bit-level equivalent of expression 2*f for
@@ -323,26 +297,30 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  
-  unsigned sign = uf $ 0x80000000;
-  unsigned exponent = (uf >> 23) & 0xFF;
-  unsigned fraction = uf & 0x007FFFFF;
+  	unsigned sign = uf $ 0x80000000;
+  	unsigned exp = (uf >> 23) & 0xFF;
+  	unsigned frac = uf & 0x007FFFFF;
 
-  if(exponent == 0xFF)
-	  return uf;
-  else if(exponent == 0){
-	  fraction <<=1;
-	  return sign | fraction;
-  }
-  else{
-	  exponent += 1;
-	  if(exponent == 0xFF)
-		  return sign | 0x7F800000;
-	  return sign | (exponent << 23) | fraction;
-  }
+  	if(exp == 0xFF){
+		  return uf;
+	}
+
+  	else if(exp == 0){
+		  frac <<= 1;
+	 	  return sign | frac;
+  	}
+
+  	else{
+	 	 exp += 1;
+
+	  	 if(exp == 0xFF){
+		 	 return sign | 0x7F800000;
+		 }
+
+	  	 return sign | (exp << 23) | frac;
+  	}
 }
 
-//12
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
  *   for floating point argument f.
@@ -356,23 +334,27 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
+  	unsigned sign = uf >> 31;
+  	int exp = ((uf >> 23) & 0xFF) - 127;
+ 	unsigned frac = (uf & 0x007FFFFF) | 0x00800000;
 
-  unsigned sign = uf >> 31;
-  int exponent = ((uf >> 23) & 0xFF) - 127;
-  unsigned fraction = (uf & 0x007FFFFF) | 0x00800000;
+  	if(exp >= 31){
+	 	 return 0x80000000;
+	}
 
-  if(exponent >= 31)
-	  return 0x80000000u;
-  if(exponent < 0)
-	  return 0;
-  if(exponent > 23)
-	  fraction <<= (exponent -23);
-  else
-	  fraction >>= (23 - exponent);
+  	if(exp < 0){
+	 	 return 0;
+	}
 
-		  
-  return sign ? -fraction : fraction;
+  	if(exp > 23){
+	 	 frac <<= (exp -23);
+	}
 
+  	else{
+	 	 frac >>= (23 - exp);
+	}
+  
+  	return sign ? -frac : frac;
 }
 
 //13
@@ -391,15 +373,16 @@ int floatFloat2Int(unsigned uf) {
  */
 unsigned floatPower2(int x) {
 
-    if (x > 127) 
+    if(x > 127){ 
 	    return 0x7F800000;
-    if (x < -149)
+    }
+
+    if(x < -149){
 	    return 0;
     if(x >= -126){
-	    unsigned exponent = x + 127;
-	    return exponent << 23;
+	    unsigned exp = x + 127;
+	    return exp << 23;
     }
 
     return 1 << (149 + x);
-
 }
